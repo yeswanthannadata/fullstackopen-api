@@ -43,6 +43,11 @@ app.post("/api/persons", (request, response) => {
       .json({ error: "name and number are mandatory" });
   }
 
+  const existCheck = persons.some((person) => person.name === body.name);
+  if (existCheck) {
+    return response.status(400).json({ error: "name must be unique" });
+  }
+
   const person = {
     name: body.name,
     number: body.number,
