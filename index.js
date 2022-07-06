@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 
+app.use(express.json());
+
 let persons = [
   {
     id: 1,
@@ -24,8 +26,31 @@ let persons = [
   },
 ];
 
+const generateId = () => {
+  return Math.floor(1000 + Math.random() * 9000);
+};
+
 app.get("/api/persons", (request, response) => {
   response.status(200).json(persons);
+});
+
+app.post("/api/persons", (request, response) => {
+  const body = request.body;
+
+  if (!body.name || !body.number) {
+    return response
+      .status(400)
+      .json({ error: "name and number are mandatory" });
+  }
+
+  const person = {
+    name: body.name,
+    number: body.number,
+    id: generateId(),
+  };
+
+  persons = persons.concat(person);
+  response.status(200).json(person);
 });
 
 app.get("/api/persons/:id", (request, response) => {
