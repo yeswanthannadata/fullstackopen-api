@@ -1,0 +1,1 @@
+DELETE https://secret-coast-15373.herokuapp.com/api/persons/9979

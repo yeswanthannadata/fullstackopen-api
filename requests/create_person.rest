@@ -1,0 +1,7 @@
+POST https://secret-coast-15373.herokuapp.com/api/persons
+Content-Type: application/json
+
+{
+    "name": "Yeshu",
+    "number": "7022120438"
+}
