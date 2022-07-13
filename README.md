@@ -1,3 +1,3 @@
-APP: https://secret-coast-15373.herokuapp.com/
+APP: https://vast-depths-05781.herokuapp.com/
 
-API: https://secret-coast-15373.herokuapp.com/api/persons
+API: https://vast-depths-05781.herokuapp.com/api/persons
