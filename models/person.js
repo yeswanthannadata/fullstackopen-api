@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const uniqueValidator = require("mongoose-unique-validator");
 
 const url = process.env.MONGODB_URI;
 
@@ -12,8 +13,23 @@ mongoose
   });
 
 const personSchema = mongoose.Schema({
-  name: String,
-  number: String,
+  name: {
+    type: String,
+    required: true,
+    minLength: 3,
+    unique: true,
+  },
+  number: {
+    type: String,
+    required: true,
+    minLength: 8,
+    validate: {
+      validator: (v) => {
+        return /\d{2,3}-\d+/.test(v);
+      },
+      message: (props) => `${props.value} is not a valid number`,
+    },
+  },
 });
 
 personSchema.set("toJSON", {
@@ -24,4 +40,5 @@ personSchema.set("toJSON", {
   },
 });
 
+personSchema.plugin(uniqueValidator);
 module.exports = new mongoose.model("Person", personSchema);
